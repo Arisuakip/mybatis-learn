@@ -21,4 +21,6 @@ public interface UserMapper {
     void deleteUser();
 
     User getUserById();
+
+    List<User> getAllUser();
 }

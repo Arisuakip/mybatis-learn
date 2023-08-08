@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * @author liangcheng
@@ -33,8 +34,9 @@ public class MybatisTest {
 //        int result = mapper.insertUser();
 //        mapper.updateUser();
 
-        User user = mapper.getUserById();
-        System.out.println(user);
+//        User user = mapper.getUserById();
+        List<User> allUser = mapper.getAllUser();
+        allUser.forEach(System.out::println);
 //        System.out.println("结果：" + result);
 
     }

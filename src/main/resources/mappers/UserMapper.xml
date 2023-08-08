@@ -16,7 +16,12 @@
         delete from t_user where id = 5;
     </delete>
 
-    <select id="getUserById">
+    <select id="getUserById" resultType="com.qyhlp.po.User">
+        <!-- reslutType :字段名属性一致，resultMap：字段名属性名不一致" -->
         select * from t_user where id = 3;
+    </select>
+
+    <select id="getAllUser" resultType="com.qyhlp.po.User">
+        select * from t_user;
     </select>
 </mapper>
