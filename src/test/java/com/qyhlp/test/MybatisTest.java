@@ -1,5 +1,6 @@
 package com.qyhlp.test;
 
+import com.qyhlp.Utils.SQLSessionUtils;
 import com.qyhlp.mapper.UserMapper;
 import com.qyhlp.po.User;
 import org.apache.ibatis.io.Resources;
@@ -18,16 +19,11 @@ import java.util.List;
  * @description
  **/
 public class MybatisTest {
+    //${}字符串拼接；#{}占位符赋值
 
     @Test
     public void testMybatis() throws IOException {
-        InputStream inputStream = Resources.getResourceAsStream("mybatis-config.xml");
-        //获取sqlsessionFactoryBuilder
-        SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
-        //获取sqlSessionFactory
-        SqlSessionFactory sqlSessionFactory = sqlSessionFactoryBuilder.build(inputStream);
-        //获取SQLSession
-        SqlSession sqlSession = sqlSessionFactory.openSession(true);
+        SqlSession sqlSession = SQLSessionUtils.getSqlSession();
         //获取mapper接口对象
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
         //功能
