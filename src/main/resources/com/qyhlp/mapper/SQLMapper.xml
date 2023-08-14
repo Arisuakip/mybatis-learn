@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qyhlp.mapper.SQLMapper">
+    <select id="getUserByLike" resultType="User">
+        select * from t_user where username like "%"#{username}"%";
+    </select>
+
+    <delete id="deleteByIdList">
+        delete from t_user where id in (${ids});
+    </delete>
+
+    <!-- 获取自动递增主键 keyProperty:主键自动映射到属性-->
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user values (null ,#{username},#{password},#{age},#{sex},#{email});
+    </insert>
+</mapper>

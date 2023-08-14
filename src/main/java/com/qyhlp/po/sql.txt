@@ -1,0 +1,27 @@
+    create table t_emp(
+    `eid` int(11) auto_increment,
+    emp_name varchar(20) not null default "",
+    `age` int(11) not null default 0,
+    `sex` varchar(10) not null default "",
+    `email` varchar(50) not null default "",
+    `did` int(11) default 0,
+    primary key(`eid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+create table t_dept(
+    `did` int(11) auto_increment,
+    dept_name varchar(20) not null default "",
+    primary key(`did`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO t_emp
+VALUES(null,"zhangsan",18,"men","114@qq.com",1),
+(null,"lisi",18,"men","514@qq.com",2),
+(null,"wangwu",19,"women","114@qq.com",3),
+(null,"zhaoliu",22,"men","114@qq.com",1),
+(null,"tianqi",25,"men","131313@qq.com",2);
+
+
+INSERT INTO t_dept
+VALUES
+(null,"a"),(null,"b"),(null,"c");

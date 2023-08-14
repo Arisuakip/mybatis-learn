@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qyhlp.mapper.UserMapper">
+    <!--int insertUser();-->
+    <update id="updateUser">
+        update t_user set username = "lisi" where id = 4;
+    </update>
+
+    <delete id="deleteUser">
+        delete from t_user where id = 5;
+    </delete>
+
+    <select id="getUserById" resultType="com.qyhlp.po.User">
+        <!-- reslutType :字段名属性一致，resultMap：字段名属性名不一致" -->
+        select * from t_user where id = #{id};
+    </select>
+
+    <select id="getAllUser" resultType="com.qyhlp.po.User">
+        select * from t_user;
+    </select>
+    
+    <select id="getUserByUsername" resultType="User">
+        select * from t_user where username = #{username}
+    </select>
+
+    <!--单行单列-->
+    <select id="getCount" resultType="Integer">
+        select count(*) from t_user;
+    </select>
+
+    <select id="checkLogin" resultType="User">
+        select * from t_user where username = #{arg0} and password = #{arg1};
+    </select>
+
+
+    <!--手动构建map集合-->
+    <select id="checkLoginByMap" resultType="User">
+        select * from t_user where username = #{username} and password = #{password};
+    </select>
+
+    <!--实体类类型-->
+    <insert id="insertUser">
+        insert into t_user values(null,#{username},#{password},#{age},#{sex},#{email});
+    </insert>
+
+    <!--@Param注解命名参数-->
+    <select id="checkLoginByParam" resultType="User">
+        select * from t_user where username = #{username} and password = #{password}
+    </select>
+
+    <select id="getUserByIdToMap" resultType="map">
+        select * from t_user where id = #{id};
+    </select>
+
+    <select id="getAllUserToMap" resultType="map">
+        select * from t_user;
+    </select>
+</mapper>
