@@ -22,18 +22,53 @@
 <!--    select * from t_emp;-->
 <!--  </select>-->
 
-  <!-- 多对一映射 -->
-  <resultMap id="empAndDeptResultMapOne" type="Emp">
+  <!-- 多对一映射 级联赋值-->
+<!--  <resultMap id="empAndDeptResultMapOne" type="Emp">-->
+<!--    <id property="eid" column="eid"></id>-->
+<!--    <result property="empName" column="emp_name"></result>-->
+<!--    <result property="age" column="age"></result>-->
+<!--    <result property="sex" column="sex"></result>-->
+<!--    <result property="email" column="email"></result>-->
+<!--&lt;!&ndash;    级联赋值&ndash;&gt;-->
+<!--    <result property="dept.did" column="did"></result>-->
+<!--    <result property="dept.deptName" column="dept_name"></result>-->
+<!--  </resultMap>-->
+<!--  <select id="getEmpAndDept" resultMap="empAndDeptResultMapOne">-->
+<!--    select * from t_emp left join t_dept on t_emp.did=t_dept.did where t_emp.eid = #{eid};-->
+<!--  </select>-->
+  <!-- 多对一映射 association-->
+<!--  <resultMap id="empAndDeptResultMapOne" type="Emp">-->
+<!--    <id property="eid" column="eid"></id>-->
+<!--    <result property="empName" column="emp_name"></result>-->
+<!--    <result property="age" column="age"></result>-->
+<!--    <result property="sex" column="sex"></result>-->
+<!--    <result property="email" column="email"></result>-->
+<!--    <association property="dept" javaType="Dept">-->
+<!--      <id property="did" column="did"></id>-->
+<!--      <result property="deptName" column="dept_name"></result>-->
+<!--    </association>-->
+<!--  </resultMap>-->
+<!--  <select id="getEmpAndDept" resultMap="empAndDeptResultMapOne">-->
+<!--    select * from t_emp left join t_dept on t_emp.did=t_dept.did where t_emp.eid = #{eid};-->
+<!--  </select>-->
+
+  <!-- 多对一映射 association分步查询-->
+  <resultMap id="getEmpAndDeptByStepResultMap" type="Emp">
     <id property="eid" column="eid"></id>
     <result property="empName" column="emp_name"></result>
     <result property="age" column="age"></result>
     <result property="sex" column="sex"></result>
     <result property="email" column="email"></result>
-    <result property="dept.did" column="did"></result>
-    <result property="dept.deptName" column="dept_name"></result>
+    <!-- column分步查询的条件 select分步查询的唯一标识 fetchType：开启延迟加载后默认lazy,eager立即加载-->
+    <association property="dept" select="com.qyhlp.mapper.DeptMapper.getEmpAndDeptByStepTwo" column="did" fetchType="lazy"></association>
   </resultMap>
-  <select id="getEmpAndDept" resultMap="empAndDeptResultMapOne">
-    select * from t_emp left join t_dept on t_emp.did=t_dept.did where t_emp.eid = #{eid};
+
+  <select id="getEmpAndDeptByStepOne" resultMap="getEmpAndDeptByStepResultMap">
+    select * from t_emp where eid = #{eid};
   </select>
+
+
+
+
 
 </mapper>

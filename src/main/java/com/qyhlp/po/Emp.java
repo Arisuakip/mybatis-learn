@@ -3,6 +3,7 @@ package com.qyhlp.po;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 /**
  * 员工信息表
@@ -10,9 +11,9 @@ import lombok.NoArgsConstructor;
  * @date 2023/08/14
  * @description
  */
-@Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class Emp {
 
     private Integer eid;

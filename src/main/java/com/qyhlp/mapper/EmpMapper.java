@@ -23,4 +23,11 @@ public interface EmpMapper {
      * @return
      */
     Emp getEmpAndDept(@Param("eid")Integer eid);
+
+    /**
+     * 分布查询第一步，查询员工信息
+     * @param eid
+     * @return
+     */
+    Emp getEmpAndDeptByStepOne(@Param("eid")Integer eid);
 }

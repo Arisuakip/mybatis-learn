@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qyhlp.mapper.DynamicSQLMapper">
+<!--  <select id="getEmpByCondition" resultType="emp">-->
+<!--    select * from t_emp where 1=1-->
+<!--    <if test="empName != null and empName != ''">-->
+<!--      and emp_name = #{empName}-->
+<!--    </if>-->
+<!--    <if test="age != null and age != ''">-->
+<!--      and age = #{age}-->
+<!--    </if>-->
+<!--    <if test="sex != null and sex != ''">-->
+<!--      and sex = #{sex}-->
+<!--    </if>-->
+<!--    <if test="email != null and email != ''">-->
+<!--      and email = #{email}-->
+<!--    </if>-->
+<!--  </select>-->
+
+<!--  where标签，自动生成关键字，能自动去掉内容前多余的and和or-->
+  <select id="getEmpByCondition2" resultType="emp">
+    select * from t_emp
+    <where>
+      <if test="empName != null and empName != ''">
+        and emp_name = #{empName}
+      </if>
+      <if test="age != null and age != ''">
+        and age = #{age}
+      </if>
+      <if test="sex != null and sex != ''">
+        and sex = #{sex}
+      </if>
+      <if test="email != null and email != ''">
+        and email = #{email}
+      </if>
+    </where>
+  </select>
+
+<!--  trim标签 prefix suffix:前后添加指定内容 suffixOverrides prefixOverrides：去掉指定内容-->
+  <select id="getEmpByConditionThree" resultType="emp">
+    select * from t_emp
+    <trim prefix="where" suffixOverrides="and|or">
+      <if test="empName != null and empName != ''">
+        emp_name = #{empName} and
+      </if>
+      <if test="age != null and age != ''">
+        age = #{age} and
+      </if>
+      <if test="sex != null and sex != ''">
+        sex = #{sex} and
+      </if>
+      <if test="email != null and email != ''">
+        email = #{email} and
+      </if>
+    </trim>
+  </select>
+
+
+<!--  choose父标签：when条件，otherwise  最终只会执行一个 if...else if...else if...else-->
+<!--  when至少1个 otherwise最多一个-->
+  <select id="getEmpByChoose" resultType="emp">
+    select * from t_emp
+    <where>
+      <choose>
+        <when test="empName != null and empName != ''">
+          emp_name = #{empName}
+        </when>
+        <when test="age != null and age != ''">
+          age = #{age}
+        </when>
+        <when test="sex != null and sex != ''">
+          sex = #{sex}
+        </when>
+        <when test="email != null and email != ''">
+          email = #{email}
+        </when>
+        <otherwise>
+          did = 1
+        </otherwise>
+      </choose>
+    </where>
+  </select>
+
+  <delete id="deleteMoreByArray">
+    delete from t_emp where eid in
+    <foreach collection="eids" item="eid" separator="," open="(" close=")">
+      #{eid}
+    </foreach>
+  </delete>
+
+  <insert id="batchInsertEmp">
+    insert into t_emp values
+    <foreach collection="emps" item="emp" separator=",">
+      (null,#{emp.empName},#{emp.age},#{emp.sex},#{emp.email},null )
+    </foreach>
+  </insert>
+
+</mapper>

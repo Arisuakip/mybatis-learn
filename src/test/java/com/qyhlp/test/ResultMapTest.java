@@ -33,4 +33,13 @@ public class ResultMapTest {
         System.out.println(empAndDept);
     }
 
+    @Test
+    public void testGetEmpAndDeptByStep() throws IOException {
+        SqlSession sqlSession = SQLSessionUtils.getSqlSession();
+        EmpMapper mapper = sqlSession.getMapper(EmpMapper.class);
+
+        Emp empAndDept = mapper.getEmpAndDeptByStepOne(1);
+        System.out.println(empAndDept.getEmpName());
+    }
+
 }

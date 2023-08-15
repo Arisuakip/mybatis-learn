@@ -6,8 +6,12 @@
 
     <!-- 全局配置 -->
     <settings>
-        <!--下划线自动映射为驼峰-->
+<!--        下划线自动映射为驼峰-->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
+<!--        延迟加载:访问哪些信息执行哪些sql-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+<!--        关闭按需加载:默认是false-->
+<!--        <setting name="aggressiveLazyLoading" value="false"/>-->
     </settings>
     <typeAliases>
 <!--        <typeAlias type="com.qyhlp.po.User" alias="User"></typeAlias>-->
